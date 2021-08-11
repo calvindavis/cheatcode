@@ -2,7 +2,30 @@
 <html>
 	<head>
 		<title>Cheatcode demo</title>
-		<script src="./index.js"></script>
 	</head>
-	<body></body>
+	<body>
+		<h1>Cheatcode</h1>
+		<p tabindex="0">
+			Focus on this paragraph element and type the word "success".
+		</p>
+		<script type="module">
+			import cheatcode from "./cheatcode";
+
+			const p = document.querySelector("p");
+			const off = cheatcode(p, "cheatcode");
+
+			p.addEventListener("cheatcode", function (event) {
+				const detail = event.detail;
+				console.log(detail);
+
+				if (detail.complete) {
+					alert(`You did it! ${detail.completions} time(s)!!`);
+
+					if (detail.completions > 2) {
+						off();
+					}
+				}
+			});
+		</script>
+	</body>
 </html>
