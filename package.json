@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "snowpack dev",
+		"build": "snowpack"
 	},
 	"repository": {
 		"type": "git",
@@ -17,6 +19,7 @@
 	},
 	"homepage": "https://github.com/calvindavis/cheatcode#readme",
 	"devDependencies": {
-		"prettier": "2.3.2"
+		"prettier": "2.3.2",
+		"snowpack": "^3.8.6"
 	}
 }
