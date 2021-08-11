@@ -5,26 +5,48 @@
 	</head>
 	<body>
 		<h1>Cheatcode</h1>
-		<p tabindex="0">
-			Focus on this paragraph element and type the word "success".
+		<p id="p1" tabindex="0">
+			Focus on this paragraph element and type the word "cheatcode".
+		</p>
+		<p id="p2" tabindex="0" style="position: relative">
+			Focus on this paragraph element and type "progress";
+			<span
+				style="
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					background-color: limegreen;
+					z-index: -1;
+				"
+			></span>
 		</p>
 		<script type="module">
 			import cheatcode from "./cheatcode";
 
-			const p = document.querySelector("p");
-			const off = cheatcode(p, "cheatcode");
+			const p1 = document.querySelector("#p1");
+			const off = cheatcode(p1, "cheatcode");
 
-			p.addEventListener("cheatcode", function (event) {
+			p1.addEventListener("cheatcode", function (event) {
 				const detail = event.detail;
 				console.log(detail);
 
 				if (detail.complete) {
-					alert(`You did it! ${detail.completions} time(s)!!`);
-
-					if (detail.completions > 2) {
-						off();
-					}
+					alert(
+						`You did it ${detail.completions} time${
+							detail.completions === 1 ? "" : "s"
+						}!`
+					);
 				}
+			});
+
+			const p2 = document.querySelector("#p2");
+			const p2Div = p2.querySelector("span");
+
+			cheatcode(p2, "progress");
+
+			p2.addEventListener("cheatcode", function (event) {
+				p2Div.style.width = `${100 * event.detail.progress}%`;
 			});
 		</script>
 	</body>
