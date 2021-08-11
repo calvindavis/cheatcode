@@ -16,7 +16,7 @@
 		"url": "https://github.com/calvindavis/cheatcode/issues"
 	},
 	"homepage": "https://github.com/calvindavis/cheatcode#readme",
-	"dependencies": {
+	"devDependencies": {
 		"prettier": "2.3.2"
 	}
 }
