@@ -1,0 +1,19 @@
+{
+	"name": "cheatcode",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/calvindavis/cheatcode.git"
+	},
+	"author": "Calvin Davis",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/calvindavis/cheatcode/issues"
+	},
+	"homepage": "https://github.com/calvindavis/cheatcode#readme"
+}
