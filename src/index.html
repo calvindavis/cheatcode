@@ -25,7 +25,10 @@
 			import cheatcode from "./cheatcode";
 
 			const p1 = document.querySelector("#p1");
-			const off = cheatcode(p1, "cheatcode");
+			cheatcode(p1, {
+				code: "cheatcode",
+				once: true,
+			});
 
 			p1.addEventListener("cheatcode", function (event) {
 				const detail = event.detail;
