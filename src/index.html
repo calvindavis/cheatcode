@@ -16,8 +16,9 @@
 					top: 0;
 					left: 0;
 					bottom: 0;
-					background-color: limegreen;
+					background-color: yellow;
 					z-index: -1;
+					transition: all 0.3s;
 				"
 			></span>
 		</p>
@@ -49,7 +50,14 @@
 			cheatcode(p2, "progress");
 
 			p2.addEventListener("cheatcode", function (event) {
-				p2Div.style.width = `${100 * event.detail.progress}%`;
+				if (event.detail.correct) {
+					p2Div.style.backgroundColor = event.detail.complete
+						? "limegreen"
+						: "yellow";
+					p2Div.style.width = `${100 * event.detail.progress}%`;
+				} else {
+					p2Div.style.backgroundColor = "red";
+				}
 			});
 		</script>
 	</body>
