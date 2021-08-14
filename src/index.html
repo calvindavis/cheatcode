@@ -25,39 +25,36 @@
 		<script type="module">
 			import cheatcode from "./cheatcode";
 
-			const p1 = document.querySelector("#p1");
 			cheatcode(p1, {
 				code: "cheatcode",
-				once: true,
+				listener: function (event) {
+					const detail = event.detail;
+					console.log(detail);
+
+					if (detail.complete) {
+						alert(
+							`You did it ${detail.completions} time${
+								detail.completions === 1 ? "" : "s"
+							}!`
+						);
+					}
+				},
 			});
 
-			p1.addEventListener("cheatcode", function (event) {
-				const detail = event.detail;
-				console.log(detail);
+			cheatcode(p2, "progress", {
+				listener: function (event) {
+					const span = p2.querySelector("span");
+					const style = span.style;
 
-				if (detail.complete) {
-					alert(
-						`You did it ${detail.completions} time${
-							detail.completions === 1 ? "" : "s"
-						}!`
-					);
-				}
-			});
-
-			const p2 = document.querySelector("#p2");
-			const p2Div = p2.querySelector("span");
-
-			cheatcode(p2, "progress");
-
-			p2.addEventListener("cheatcode", function (event) {
-				if (event.detail.correct) {
-					p2Div.style.backgroundColor = event.detail.complete
-						? "limegreen"
-						: "yellow";
-					p2Div.style.width = `${100 * event.detail.progress}%`;
-				} else {
-					p2Div.style.backgroundColor = "red";
-				}
+					if (event.detail.correct) {
+						style.backgroundColor = event.detail.complete
+							? "limegreen"
+							: "yellow";
+						style.width = `${100 * event.detail.progress}%`;
+					} else {
+						style.backgroundColor = "red";
+					}
+				},
 			});
 		</script>
 	</body>

@@ -67,5 +67,9 @@ export default function cheatcode(
 
 	target.addEventListener("keypress", handler);
 
+	if (config.listener) {
+		target.addEventListener("cheatcode", config.listener);
+	}
+
 	return off;
 }
