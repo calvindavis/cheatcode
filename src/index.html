@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Cheatcode demo</title>
-	</head>
-	<body>
-		<h1>Cheatcode</h1>
-		<p id="p1" tabindex="0">
-			Focus on this paragraph element and type the word "cheatcode".
-		</p>
-		<p id="p2" tabindex="0" style="position: relative">
-			Focus on this paragraph element and type "progress";
-			<span
-				style="
-					position: absolute;
-					top: 0;
-					left: 0;
-					bottom: 0;
-					background-color: yellow;
-					z-index: -1;
-					transition: all 0.3s;
-				"
-			></span>
-		</p>
-		<script type="module">
-			import cheatcode from "./cheatcode";
+  <head>
+    <title>Cheatcode demo</title>
+  </head>
+  <body>
+    <h1>Cheatcode</h1>
+    <p id="p1" tabindex="0">
+      Focus on this paragraph element and type the word "cheatcode".
+    </p>
+    <p id="p2" tabindex="0" style="position: relative">
+      Focus on this paragraph element and type "progress";
+      <span
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          background-color: yellow;
+          z-index: -1;
+          transition: all 0.3s;
+        "
+      ></span>
+    </p>
+    <script type="module">
+      import cheatcode from "./cheatcode";
 
-			cheatcode(p1, {
-				code: "cheatcode",
-				listener: function (event) {
-					const detail = event.detail;
-					console.log(detail);
+      cheatcode(p1, {
+        code: "cheatcode",
+        listener: function (event) {
+          const detail = event.detail;
+          console.log(detail);
 
-					if (detail.complete) {
-						alert(
-							`You did it ${detail.completions} time${
-								detail.completions === 1 ? "" : "s"
-							}!`
-						);
-					}
-				},
-			});
+          if (detail.complete) {
+            alert(
+              `You did it ${detail.completions} time${
+                detail.completions === 1 ? "" : "s"
+              }!`
+            );
+          }
+        },
+      });
 
-			cheatcode(p2, "progress", {
-				listener: function (event) {
-					const span = p2.querySelector("span");
-					const style = span.style;
+      cheatcode(p2, "progress", {
+        listener: function (event) {
+          const span = p2.querySelector("span");
+          const style = span.style;
 
-					if (event.detail.correct) {
-						style.backgroundColor = event.detail.complete
-							? "limegreen"
-							: "yellow";
-						style.width = `${100 * event.detail.progress}%`;
-					} else {
-						style.backgroundColor = "red";
-					}
-				},
-			});
-		</script>
-	</body>
+          if (event.detail.correct) {
+            style.backgroundColor = event.detail.complete
+              ? "limegreen"
+              : "yellow";
+            style.width = `${100 * event.detail.progress}%`;
+          } else {
+            style.backgroundColor = "red";
+          }
+        },
+      });
+    </script>
+  </body>
 </html>

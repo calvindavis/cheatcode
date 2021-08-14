@@ -1,25 +1,25 @@
 {
-	"name": "cheatcode",
-	"version": "0.0.1",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "snowpack dev",
-		"build": "snowpack"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/calvindavis/cheatcode.git"
-	},
-	"author": "Calvin Davis",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/calvindavis/cheatcode/issues"
-	},
-	"homepage": "https://github.com/calvindavis/cheatcode#readme",
-	"devDependencies": {
-		"prettier": "2.3.2",
-		"snowpack": "^3.8.6"
-	}
+  "name": "cheatcode",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "snowpack dev",
+    "build": "snowpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calvindavis/cheatcode.git"
+  },
+  "author": "Calvin Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calvindavis/cheatcode/issues"
+  },
+  "homepage": "https://github.com/calvindavis/cheatcode#readme",
+  "devDependencies": {
+    "prettier": "2.3.2",
+    "snowpack": "^3.8.6"
+  }
 }
