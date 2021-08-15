@@ -23,9 +23,9 @@
       ></span>
     </p>
     <script type="module">
-      import cheatcode from "./cheatcode";
+      import Cheatcode from "./";
 
-      cheatcode(p1, {
+      new Cheatcode(p1, {
         code: "cheatcode",
         listener: function (event) {
           const detail = event.detail;
@@ -41,7 +41,7 @@
         },
       });
 
-      cheatcode(p2, "progress", {
+      new Cheatcode(p2, "progress", {
         listener: function (event) {
           const span = p2.querySelector("span");
           const style = span.style;
