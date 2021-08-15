@@ -2,76 +2,66 @@ import CheatcodeEvent from "./CheatcodeEvent";
 import CheatcodeSettings from "./CheatcodeSettings";
 
 export default class Cheatcode {
-  constructor(
-    target: EventTarget,
-    code: string | CheatcodeSettings,
-    settings: CheatcodeSettings = undefined
-  ) {
-    let config: CheatcodeSettings;
+  private _input: string = "";
+  private _completions: number = 0;
+  private _settings: CheatcodeSettings;
 
-    if (typeof code === "string" && settings === undefined) {
-      config = { code };
+  constructor(settings: CheatcodeSettings) {
+    this._settings = settings;
+    console.log("settings", this._settings);
+
+    this._settings.target.addEventListener("keypress", this._keypressListener);
+
+    if (this._settings.listener) {
+      this._settings.target.addEventListener(
+        CheatcodeEvent.TYPE_ARG,
+        this._settings.listener
+      );
     }
-
-    if (typeof code === "string" && settings !== undefined) {
-      config = settings;
-      config.code = code;
-    }
-
-    if (typeof code !== "string" && code !== null) {
-      config = code as CheatcodeSettings;
-    }
-
-    console.log("config", config);
-
-    let input = "";
-    let completions = 0;
-
-    const handler = (event: KeyboardEvent) => {
-      input += event.key;
-
-      const correct = config.code.startsWith(input);
-      const progress = correct ? input.length / config.code.length : 0;
-      const complete = progress === 1;
-
-      console.log(input, correct, progress);
-
-      if (complete || correct === false) {
-        input = "";
-      }
-
-      if (complete) {
-        completions += 1;
-
-        if (config.once) {
-          off();
-        }
-      }
-
-      const e: CheatcodeEvent = new CheatcodeEvent("cheatcode", {
-        detail: {
-          correct,
-          progress,
-          completions,
-          code: config.code,
-          complete,
-          input,
-        },
-      });
-
-      target.dispatchEvent(e);
-    };
-
-    const off = (): void => {
-      target.removeEventListener("keypress", handler);
-    };
-
-    target.addEventListener("keypress", handler);
-
-    if (config.listener) {
-      target.addEventListener("cheatcode", config.listener);
-    }
-
-    return off;
   }
+
+  public off(): void {
+    this._settings.target.removeEventListener(
+      "keypress",
+      this._keypressListener
+    );
+  }
+
+  private _keypressListener: EventListener = (event: Event): void => {
+    const keyboardEvent = event as KeyboardEvent;
+    this._input += keyboardEvent.key;
+
+    const correct = this._settings.code.startsWith(this._input);
+    const progress = correct
+      ? this._input.length / this._settings.code.length
+      : 0;
+    const complete = progress === 1;
+
+    console.log(this._input, correct, progress);
+
+    if (complete || correct === false) {
+      this._input = "";
+    }
+
+    if (complete) {
+      this._completions += 1;
+
+      if (this._settings.once) {
+        this.off();
+      }
+    }
+
+    this._settings.target.dispatchEvent(
+      new CheatcodeEvent({
+        detail: {
+          code: this._settings.code,
+          complete,
+          completions: this._completions,
+          correct,
+          input: this._input,
+          progress,
+        },
+      })
+    );
+  };
 }

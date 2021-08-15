@@ -5,9 +5,11 @@
   </head>
   <body>
     <h1>Cheatcode</h1>
+
     <p id="p1" tabindex="0">
       Focus on this paragraph element and type the word "cheatcode".
     </p>
+
     <p id="p2" tabindex="0" style="position: relative">
       Focus on this paragraph element and type "progress";
       <span
@@ -22,10 +24,14 @@
         "
       ></span>
     </p>
+
+    <p id="p3" tabindex="0">Focus on this paragraph element and type "once".</p>
+
     <script type="module">
       import Cheatcode from "./";
 
-      new Cheatcode(p1, {
+      new Cheatcode({
+        target: p1,
         code: "cheatcode",
         listener: function (event) {
           const detail = event.detail;
@@ -41,7 +47,9 @@
         },
       });
 
-      new Cheatcode(p2, "progress", {
+      new Cheatcode({
+        target: p2,
+        code: "progress",
         listener: function (event) {
           const span = p2.querySelector("span");
           const style = span.style;
@@ -53,6 +61,17 @@
             style.width = `${100 * event.detail.progress}%`;
           } else {
             style.backgroundColor = "red";
+          }
+        },
+      });
+
+      new Cheatcode({
+        target: p3,
+        code: "once",
+        once: true,
+        listener: function (event) {
+          if (event.detail.complete) {
+            alert("This will only happen once.");
           }
         },
       });

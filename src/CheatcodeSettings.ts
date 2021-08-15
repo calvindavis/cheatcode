@@ -1,7 +1,6 @@
-import CheatcodeEvent from "./CheatcodeEvent";
-
 export default interface CheatcodeSettings {
   code: string;
+  listener?: EventListener;
   once?: boolean;
-  listener?: (event: CheatcodeEvent) => void;
+  target: EventTarget;
 }
